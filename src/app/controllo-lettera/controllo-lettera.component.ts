@@ -20,21 +20,19 @@ export class ControlloLetteraComponent implements OnInit {
 
     //Validators.pattern(/^\S*$/) -> spazio nei campi
 
-    firstName: ['', [Validators.required, Validators.minLength(2), Validators.pattern('[a-zA-Z ]*')]],
-    lastName: ['', [Validators.minLength(2), Validators.pattern('[a-zA-Z ]*')]],
-    genderf: [''],
-    genderm: ['', [Validators.required]],
-    birthday: ['', [Validators.required]],
-    cityBD:  ['', Validators.minLength(3)],
-    cf: ['', Validators.pattern('^[a-zA-Z]{6}[0-9]{2}[a-zA-Z][0-9]{2}[a-zA-Z][0-9]{3}[a-zA-Z]$')],
+    firstName: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
+    lastName: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
+    genderm: ['', Validators.required],
+    birthday: ['', Validators.required],
+    cf: ['', [Validators.pattern('^[a-zA-Z]{6}[0-9]{2}[a-zA-Z][0-9]{2}[a-zA-Z][0-9]{3}[a-zA-Z]$'), Validators.required]],
     ciNumber: ['', Validators.pattern('^[a-zA-Z]{2}[0-9]{7}')],
     ciEmission: ['', [Validators.required]],
     ciEspire: ['', [Validators.required]],
     email: ['', Validators.pattern("[a-z0-9!#$%&'*+\=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+\=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")],
-    route: ['', [Validators.minLength(3), Validators.pattern('[a-zA-Z ]*')]],
-    civicNumber: ['', [Validators.maxLength(3), Validators.pattern('[0-9]*')]],
-    cityResidence: ['',[ Validators.minLength(3), Validators.pattern('[a-zA-Z ]*')]],
-    cap: ['', [Validators.minLength(3), Validators.pattern('[0-9]*')]],
+    route: ['', Validators.pattern('[a-zA-Z ]*')],
+    civicNumber: ['', Validators.pattern('[0-9]*')],
+    cityResidence: ['', Validators.pattern('[a-zA-Z ]*')],
+    cap: ['', Validators.pattern('([0-9]{5})')],
   });
 
 
@@ -65,19 +63,35 @@ export class ControlloLetteraComponent implements OnInit {
   ngOnInit() {
   }
 
+  msgNome='';
+
   onSubmit() {
-    return 'ciao';
+
+    let flag = true;
+
     this.controlloCodice();
     console.log(this.profileForm);
     console.warn(this.profileForm.value); // consol log con il valore del profile form
     console.log(new Date(this.profileForm.get('birthday').value) < new Date() );
+
+
+    console.log(this.profileForm)
+
+    if (this.profileForm.get('firstName').invalid) {
+      this.msgNome = 'nome non valido';
+      flag = false;
+    }
 
     // qui inizia la parte che comunica con il server
     // ho istanziato prima persona dalla classe ProvaHttp ed ora voglio assegnare al valore nome della classe persona il valore
     // di firstname
     this.persona.nome = this.profileForm.get('firstName').value;
     // ora dico che la variabile rich di tipo richiestaService mi chiami la funzione postQualcosa con parametro la persona
-    this.rich.postQualcosa(this.persona);
+
+    if ( flag ) {
+      this.rich.postQualcosa(this.persona);
+    }
+    
   }
 
   // check su nome e cognome per il controllo fiscale
@@ -165,8 +179,9 @@ export class ControlloLetteraComponent implements OnInit {
 
   cotrolloFiscaleData() {
     const mesi = ['a', 'b', 'c', 'd', 'e', 'h', 'l', 'm', 'p', 'r', 's', 't'];
+    const mesi2 = ['A', 'B', 'C', 'D', 'E', 'H', 'L', 'M', 'P', 'R', 'S', 'T'];
     const mese: number = new Date(this.profileForm.get('birthday').value).getMonth();
-    if (mesi[mese] === this.profileForm.get('cf').value[8]) {
+    if (mesi[mese] === this.profileForm.get('cf').value[8] || mesi2[mese] === this.profileForm.get('cf').value[8]) {
       return true;
     } else {
       return false;
@@ -192,7 +207,6 @@ export class ControlloLetteraComponent implements OnInit {
       && stringaCodice[5] === cfc2[2]
       && stringaCf[6] === data[2]
       && stringaCf[7] === data[3]
-      /*&& stringaCf[9] === data[8]*/
       && stringaCf[10] === data[9] ) {
         console.log(new String( parseInt(data[8], 10) + 4));
         console.log(stringaCf[9]);
@@ -277,6 +291,5 @@ export class ControlloLetteraComponent implements OnInit {
 
     return arrnAnno;
  }
-
 
 }

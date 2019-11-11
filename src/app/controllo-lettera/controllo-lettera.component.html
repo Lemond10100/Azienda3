@@ -1,23 +1,24 @@
 <form id="pf" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
   
     <label>
-        Nome:
+        Nome*:
         <input type="text" formControlName="firstName" required> 
         <a id="MM" *ngIf="profileForm.get('firstName').valid"> {{ controlloFiscaleNome() }} </a>
         <!-- formControlName serve nel ts per i validatori, le istanze e per sapere a quale si sta facendo riferimento -->
         <div id="V" *ngIf="profileForm.get('firstName').invalid && profileForm.get('firstName').touched">campo invalido</div>
         <!-- se al click il campo è sbagliato compare un div, altrimenti non succede nulla -->
+        <div>{{msgNome}}</div>
     </label>
     <br>
     <label>
-        Cognome:
+        Cognome*:
         <input type="text" formControlName="lastName" required> 
         <a id="MM" *ngIf="profileForm.get('lastName').valid"> {{ controlloFiscaleCognome() }} </a>
         <div id="V" *ngIf="profileForm.get('lastName').invalid  && profileForm.get('lastName').touched">campo invalido</div>
     </label>
     <br>
       <label>
-        Sesso:
+        Sesso*:
         f:<input type="radio"  value="f" formControlName="genderm" >
         m:<input type="radio"  value="m" formControlName="genderm" >
         <div id="V" *ngIf="profileForm.get('genderm').invalid && profileForm.get('genderm').touched">campo invalido</div>
@@ -27,7 +28,7 @@
       </label>
       <br>
       <label>
-        Data di nascita:
+        Data di nascita*:
         <input type="date" formControlName="birthday" required> 
         <a id="MM" *ngIf="profileForm.get('birthday').valid"> L'utente ha {{ anni() }} anni </a>
         <div id="V" *ngIf="profileForm.get('birthday').invalid && profileForm.get('birthday').touched">campo invalido</div>
@@ -35,66 +36,61 @@
       </label>
       <br>
       <label>
-        Comune di nascita:
-        <input type="text" formControlName="cityBD" required>
-        <div id="V" *ngIf="profileForm.get('cityBD').invalid && profileForm.get('cityBD').touched">campo invalido</div>
-      </label>
-      <br>
-      <label>
-        Codice fiscale:
-        <input class ="codfis" type="text" formControlName="cf" required> {{ controlloCodice() }}
+        Codice fiscale*:
+        <input class ="codfis" type="text" formControlName="cf" required> {{ "è valido:" + controlloCodice() }}
         <div id="V" *ngIf="profileForm.get('cf').invalid && profileForm.get('cf').touched">campo invalido</div>
+        {{cotrolloFiscaleData()}}
       </label>   
       <br>
       <label>
-        Carta d'identita:
+        Carta d'identita*:
         <input class ="cart" type="text" formControlName="ciNumber" required>
         <div id="V" *ngIf="profileForm.get('ciNumber').invalid && profileForm.get('ciNumber').touched">campo invalido</div>
       </label>
       <br>
       <label>
-        Data di rilascio:
+        Data di rilascio*:
         <input type="date" formControlName="ciEmission" required>
         <div id="V" *ngIf="profileForm.get('ciEmission').invalid && profileForm.get('ciEmission').touched">campo invalido</div>
       </label>
       <br>
       <label>
-        Data di scadenza:
+        Data di scadenza*:
         <input type="date" formControlName="ciEspire" required> {{ dataMinoreMaggiore() }}
         <div id="V" *ngIf="profileForm.get('ciEspire').invalid && profileForm.get('ciEspire').touched">campo invalido</div>
       </label>
       <br>
       <label>
         Email:
-        <input type="text" formControlName="email" required>
+        <input type="text" formControlName="email">
         <div id="V" *ngIf="profileForm.get('email').invalid && profileForm.get('email').touched">campo invalido</div>
       </label>
       <br>
       <label>
         Via/Corso:
-        <input type="text" formControlName="route" required>
+        <input type="text" formControlName="route">
         <div id="V" *ngIf="profileForm.get('route').invalid && profileForm.get('route').touched">campo invalido</div>
       </label>
       <br>
       <label>
         Numero civico:
-        <input type="text" formControlName="civicNumber" required maxlength="3">
+        <input type="text" formControlName="civicNumber">
         <div id="V" *ngIf="profileForm.get('civicNumber').invalid && profileForm.get('civicNumber').touched">campo invalido</div>
       </label>
       <br>
       <label>
         Citta:
-        <input type="text" formControlName="cityResidence" required>
+        <input type="text" formControlName="cityResidence">
         <div id="V" *ngIf="profileForm.get('cityResidence').invalid && profileForm.get('cityResidence').touched">campo invalido</div>
       </label>
       <br>
       <label>
         Cap:
-        <input type="text" formControlName="cap" required minlength="5" maxlength="5">
-        <div id="V" *ngIf="profileForm.get('cap').invalid && profileForm.get('cap').touched">campo invalido</div>
+        <input type="text" formControlName="cap">
+        <div id="V" *ngIf="profileForm.get('cap').invalid && profileForm.get('cap')">campo invalido</div>
       </label>
       <br>
-      <button type="submit" [disabled]="!profileForm.valid || !controlloCodice() " onsubmit="controlloCodice()">Submit</button>
+      <button type="submit" [disabled]="profileForm.invalid || !controlloCodice() || !dataMinoreMaggiore() || !cotrolloFiscaleData()">Submit</button>
       <div *ngFor="let post of posts | async">
         {{post | json}}
       </div>
