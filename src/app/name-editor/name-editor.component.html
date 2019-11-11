@@ -1,0 +1,10 @@
+<label>
+    Nome:
+    <input type="text" [formControl]="name"> <!-- con la parola chiave [formcontrol] e chiamandola name che è stata istanziata prima-->
+  </label>
+  <p>
+    Valore: {{ name.value }}
+  </p>
+  <p>
+    <button (click)="updateName()">Update Name</button>
+  </p>
