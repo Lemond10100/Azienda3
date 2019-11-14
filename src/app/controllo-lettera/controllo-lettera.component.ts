@@ -293,5 +293,21 @@ export class ControlloLetteraComponent implements OnInit {
 
   msgNome='';
 
-  onSubmit() { }
+  onSubmit() {
+    
+  }
+
+  onSubmit1() {
+    this.rich.saveUser(this.profileForm.value);
+  }
+
+  onSubmit2() {
+    this.rich.getUser();
+  }
+
+  progress: any = 30;
+
+  onClick() {
+    this.progress += 33;
+  }
 }

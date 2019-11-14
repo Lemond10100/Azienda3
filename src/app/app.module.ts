@@ -16,6 +16,7 @@ import {MatNativeDateModule} from '@angular/material';
 import {MAT_DATE_LOCALE} from '@angular/material/core';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatCardModule} from '@angular/material/card';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -50,6 +51,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatNativeDateModule,
     MatTooltipModule,
     MatCardModule,
+    MatProgressBarModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'it'}

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ProvaHttp } from './prova-http';
 
-@Injectable({
+@Injectable({ // decoratori che aggiungono funzionalità a questa classe
   providedIn: 'root'
 })
 export class RichiestaService {
@@ -12,7 +12,7 @@ export class RichiestaService {
   private qualcosaltro = 'unurlchenonso';
 
   // nel costruttore metto privato una variabile chiamata http che sarà di tipo HttpClient (ovvero la classe)
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
 
   // questo è il metodo per ricevere dati dal server
@@ -27,6 +27,23 @@ export class RichiestaService {
     this.http.post<ProvaHttp>(this.qualcosaltro, qualcosaCheAvraTipo).subscribe();
     // gli passo come parametri l'url che voglio e il parametro che ho nomiato nella riga prima
     // in subscribe va inserita una funzione che voglio che gli venga mandata, puo anche rimanere vuoto
+  }
+
+  saveUser(value: any) { // devo passare il parametro ce dall'altra parte invio
+  const url = 'http://pippo.it';
+  const body = value;
+  this.http.post(url, body).subscribe(
+    result => {
+      console.log(result);
+    }
+  );
+  }
+
+  getUser() {
+    const url = 'https://swapi.co/api/people/1/';
+    this.http.get(url).subscribe(
+      res => console.log(res)
+    );
   }
 
 }

@@ -14,43 +14,65 @@ flex: 1 1 auto;
 margin: 0 12px;
 }
 
-.spazio {
-    padding-top: 100px;
-    /*display: table;
-    position: absolute;
-    height: 100%;
-    width: 500px;*/
-}
-
-.bianco {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 500px;
-    height: 100%;
-    margin: 0 auto;
-    /*display: table-cell;
-    vertical-align: middle;*/
-}
-
-.sopra {
-    position: relative;
-    height: 10%;
-    background-color: teal;
-}
-
 .contenitore {
+    background-image: url("../../assets/Immagini/illustrazione.jpg");
+    background-size: 100%;
     position: relative;
+    width: 100%;
+    height: 100%;
     background-color: white;
+    display: flex;
     /*margin-left: auto;
     margin-right: auto;*/
 }
 
 .form {
+    background-color: white;
+    border-radius: 20px;
+    -webkit-box-shadow: 11px 11px 14px -1px rgb(109, 109, 109);
+    -moz-box-shadow: 11px 11px 14px -1px rgb(109, 109, 109);
+    box-shadow: 11px 11px 14px -1px rgb(109, 109, 109);
+    margin: auto;
+}
+
+.sopraForm {
+    height: 75px;
     display: flex;
-    flex-direction: column;
-    margin: 0 20px;
+}
+
+.dentroSopra {
+    font-size: 24px;
+    margin: auto;
+    padding-top: 20px;
+}
+
+.progressione {
+    height: 40px;
+}
+
+.barra {
+    margin: auto;
+}
+
+.veroForm {
+    display: flex;
+    flex-direction: row;
+}
+
+.dentroVero {
+    margin: 25px 50px;
+}
+
+.contenitorePulsante {
+    display: flex;
+    height: 75px;
+    justify-content: flex-end;
+}
+
+.pulsante {
+    margin-bottom: 20px;
+    margin-right: 20px;
+    height: 40px;
 }
 
 .sesso {

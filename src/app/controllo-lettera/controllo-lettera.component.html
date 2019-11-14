@@ -1,89 +1,134 @@
 
-<div class="spazio">
-  <div class="bianco">
-    <div class="sopra">
-      registati
-    </div>
-
+    
     <div class="contenitore">
       <form id="pf" class="form" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        <div class="sopraForm">
+          <div class="dentroSopra">
+            Registrati
+          </div>
+        </div>
+        <div class="veroForm">
+          <div class="dentroVero">
         
-        <div>
-          <mat-form-field appearance="outline">
-            <mat-label>Nome</mat-label>
-            <input class="MM" matInput formControlName="firstName" required>
-            <mat-hint>Hint</mat-hint>
-          </mat-form-field>
-          {{controlloFiscaleNome()}}
-        </div>
+            <div>
+              <mat-form-field appearance="outline">
+                <mat-label>Nome</mat-label>
+                <input class="MM" matInput formControlName="firstName" required>
+              </mat-form-field>
+              <!-- {{controlloFiscaleNome()}} -->
+            </div>
 
-        <div>
-          <mat-form-field appearance="outline">
-            <mat-label>Cognome</mat-label>
-            <input class="MM" matInput formControlName="lastName" required>
-            <mat-hint>Hint</mat-hint>
-          </mat-form-field>
-          {{controlloFiscaleCognome()}}
-        </div>
+            <div>
+              <mat-form-field appearance="outline">
+                <mat-label>Cognome</mat-label>
+                <input class="MM" matInput formControlName="lastName" required>
+              </mat-form-field>
+              <!-- {{controlloFiscaleCognome()}} -->
+            </div>
 
-        <div class="sesso">
-          <label class="labelSesso">Sesso*: </label>
-          <mat-radio-group class="example-container" formControlName="genderm">
-            <mat-radio-button value="F">Femmina</mat-radio-button>
-            <mat-radio-button value="M">Maschio</mat-radio-button>
-          </mat-radio-group>
-        </div>
-          
-        <div>
-          <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="birthday" required>
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-          {{profileForm.get('birthday').value}}
-          L'utente ha {{ anni() }} anni
-          {{cotrolloFiscaleData()}}
-        </div>
-          
-        <div>
-          <mat-form-field appearance="outline">
-            <mat-label>Codce Fiscale</mat-label>
-            <input class ="codfis" matInput formControlName="cf" requiredrequired>
-            <mat-icon matSuffix matTooltip="Esempio: STFMTL12S34L567I" matTooltipPosition="right">help_outline</mat-icon>
-            <mat-hint>Hint</mat-hint>
-          </mat-form-field>
-          {{ "è valido:" + controlloCodice() }}
-        </div>
+            <div class="sesso">
+              <label class="labelSesso">Sesso*: </label>
+              <mat-radio-group class="example-container" formControlName="genderm">
+                <mat-radio-button value="F">Femmina</mat-radio-button>
+                <mat-radio-button value="M">Maschio</mat-radio-button>
+              </mat-radio-group>
+            </div>
+              
+            <div>
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="birthday" required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              <!-- {{profileForm.get('birthday').value}}
+              L'utente ha {{ anni() }} anni
+              {{cotrolloFiscaleData()}} -->
+            </div>
+              
+            <div>
+              <mat-form-field appearance="outline">
+                <mat-label>Codce Fiscale</mat-label>
+                <input class ="codfis" matInput formControlName="cf" required>
+                <mat-icon matSuffix matTooltip="Esempio: STFMTL12S34L567I" matTooltipPosition="right">help_outline</mat-icon>
+              </mat-form-field>
+              <!-- {{ "è valido:" + controlloCodice() }} -->
+            </div>
 
-        <div>
-          <mat-form-field appearance="outline">
-            <mat-label>Carta d'Identità</mat-label>
-            <input class ="cart" matInput formControlName="ciNumber" required>
-            <mat-icon matSuffix matTooltip="Esempio: CV1234567" matTooltipPosition="right">help_outline</mat-icon>
-            <mat-hint>Hint</mat-hint>
-          </mat-form-field>
-        </div>
+            <div>
+              <mat-form-field appearance="outline">
+                <mat-label>Carta d'Identità</mat-label>
+                <input class ="cart" matInput formControlName="ciNumber" required>
+              </mat-form-field>
+            </div>
 
-        <div>
-          <mat-form-field>
-            <input matInput [matDatepicker]="picker2" placeholder="Data di Rilascio" formControlName="ciEmission" required>
-            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-            <mat-datepicker #picker2></mat-datepicker>
-          </mat-form-field>
-        </div>
+            <div>
+              <mat-form-field>
+                <input matInput [matDatepicker]="picker2" placeholder="Data di Rilascio" formControlName="ciEmission" required>
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+            </div>
 
-        <div>
-          <mat-form-field>
-            <input matInput [matDatepicker]="picker3" placeholder="Data di Scadenza" formControlName="ciEspire" required>
-            <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-            <mat-datepicker #picker3></mat-datepicker>
-          </mat-form-field>
-        </div>
+          </div>
+          <div class="dentroVero">
 
+              <div>
+                  <mat-form-field>
+                    <input matInput [matDatepicker]="picker3" placeholder="Data di Scadenza" formControlName="ciEspire" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                    <mat-datepicker #picker3></mat-datepicker>
+                  </mat-form-field>
+                </div>
+
+              <div>
+                <mat-form-field appearance="outline">
+                  <mat-label>Email</mat-label>
+                  <input class ="cart" matInput formControlName="email">
+                </mat-form-field>
+              </div>
+  
+              <div>
+                <mat-form-field appearance="outline">
+                  <mat-label>Via/Corso</mat-label>
+                  <input class ="cart" matInput formControlName="route">
+                </mat-form-field>
+              </div>
+  
+              <div>
+                <mat-form-field appearance="outline">
+                  <mat-label>Numero Civico</mat-label>
+                  <input class ="cart" matInput formControlName="civicNumber">
+                </mat-form-field>
+              </div>
+  
+              <div>
+                <mat-form-field appearance="outline">
+                  <mat-label>Città</mat-label>
+                  <input class ="cart" matInput formControlName="cityResidence">
+                </mat-form-field>
+              </div>
+  
+              <div>
+                <mat-form-field appearance="outline">
+                  <mat-label>Cap</mat-label>
+                  <input class ="cart" matInput formControlName="cap">
+                </mat-form-field>
+              </div>
+  
+            </div>
+        </div>
+        <div class="contenitorePulsante">
+          <button [disabled]="profileForm.invalid" class="pulsante" mat-raised-button color="primary" (click)="onClick()">Avanti</button>
+        </div>
+        <!-- <div class="contenitorePulsante">
+            <button class="pulsante" mat-raised-button color="primary" (click)="onSubmit1()">post</button>
+        </div>
+        <div class="contenitorePulsante">
+            <button class="pulsante" mat-raised-button color="primary" (click)="onSubmit2()">get</button>
+        </div> -->
       </form>
     </div>
-  </div>
-</div>
+
 
 
 <!--
