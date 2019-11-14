@@ -61,12 +61,6 @@ export class ControlloLetteraComponent implements OnInit {
 
 
   ngOnInit() {
-  }
-
-  msgNome='';
-
-  onSubmit() {
-
     let flag = true;
 
     this.controlloCodice();
@@ -103,78 +97,83 @@ export class ControlloLetteraComponent implements OnInit {
     let differenza: number;
 
     for ( i = 0; i < stringaNome.length; i++) {
-      if (stringaNome[i] !== 'a' && stringaNome[i] !== 'e' && stringaNome[i] !== 'i' && stringaNome[i]
-                    !== 'o' && stringaNome[i] !== 'u') {
-        stringaConsonanti += stringaNome[i];
+      
+        if (stringaNome[i] !== 'a' && stringaNome[i] !== 'e' && stringaNome[i] !== 'i' && stringaNome[i]
+                      !== 'o' && stringaNome[i] !== 'u' && stringaNome[i] !== ' ') {
+          stringaConsonanti += stringaNome[i];
+        } else {
+          if (stringaNome[i] !== ' ') {
+            stringaVocali += stringaNome[i];
+          }
+        }
+      }
+      if (stringaConsonanti.length < 3) {
+        differenza = 3 - stringaConsonanti.length;
+        if (differenza === 3) {
+          if (stringaVocali.length === 2) {
+            return stringaVocali + 'x';
+          } else {
+          return stringaVocali[0] + stringaVocali[1] + stringaVocali[2];
+          }
+        } else if (differenza === 2) {
+          if (stringaVocali.length === 1) {
+            return stringaConsonanti[0] + stringaVocali[0] + 'x';
+          }
+          return stringaConsonanti[0] + stringaVocali[0] + stringaVocali[1];
+        } else if (differenza === 1) {
+          if ( stringaVocali.length === 0 ) {
+            return stringaConsonanti[0] + stringaConsonanti[1] + 'x';
+          }
+          return stringaConsonanti[0] + stringaConsonanti[1] + stringaVocali[0];
+        }
       } else {
-        stringaVocali += stringaNome[i];
-      }
-    }
-    if (stringaConsonanti.length < 3) {
-      differenza = 3 - stringaConsonanti.length;
-      if (differenza === 3) {
-        if (stringaVocali.length === 2) {
-          return stringaVocali + 'x';
-        } else {
-        return stringaVocali[0] + stringaVocali[1] + stringaVocali[2];
-        }
-      } else if (differenza === 2) {
-        if (stringaVocali.length === 1) {
-          return stringaConsonanti[0] + stringaVocali[0] + 'x';
-        }
-        return stringaConsonanti[0] + stringaVocali[0] + stringaVocali[1];
-      } else if (differenza === 1) {
-        if ( stringaVocali.length === 0 ) {
-          return stringaConsonanti[0] + stringaConsonanti[1] + 'x';
-        }
-        return stringaConsonanti[0] + stringaConsonanti[1] + stringaVocali[0];
-      }
-    } else {
-        if (stringaConsonanti.length === 3) {
-        return stringaConsonanti;
-        } else {
-          return stringaConsonanti[0] + stringaConsonanti[2] + stringaConsonanti[3];
+          if (stringaConsonanti.length === 3) {
+          return stringaConsonanti;
+          } else {
+            return stringaConsonanti[0] + stringaConsonanti[2] + stringaConsonanti[3];
+          }
         }
       }
-    }
 
-  controlloFiscaleCognome(): string {
-    let i = 0;
-    const stringaCognome: string = this.profileForm.get('lastName').value.toLowerCase().trim();
-    let stringaConsonanti = '';
-    let stringaVocali = '';
-    let differenza: number;
+    controlloFiscaleCognome(): string {
+      let i = 0;
+      const stringaCognome: string = this.profileForm.get('lastName').value.toLowerCase().trim();
+      let stringaConsonanti = '';
+      let stringaVocali = '';
+      let differenza: number;
 
-    for ( i = 0; i < stringaCognome.length; i++) {
-      if (stringaCognome[i] !== 'a' && stringaCognome[i] !== 'e' && stringaCognome[i] !== 'i' && stringaCognome[i]
-                    !== 'o' && stringaCognome[i] !== 'u') {
-        stringaConsonanti += stringaCognome[i];
+      for ( i = 0; i < stringaCognome.length; i++) {
+        if (stringaCognome[i] !== 'a' && stringaCognome[i] !== 'e' && stringaCognome[i] !== 'i' && stringaCognome[i]
+                      !== 'o' && stringaCognome[i] !== 'u' && stringaCognome[i] !== ' ') {
+          stringaConsonanti += stringaCognome[i];
+        } else {
+          if (stringaCognome[i] !== ' ')
+            stringaVocali += stringaCognome[i];
+        }
+      }
+      if (stringaConsonanti.length < 3) {
+        differenza = 3 - stringaConsonanti.length;
+        if (differenza === 3) {
+          if (stringaVocali.length === 2) {
+            return stringaVocali + 'x';
+          } else {
+          return stringaVocali[0] + stringaVocali[1] + stringaVocali[2];
+          }
+        } else if (differenza === 2) {
+          if (stringaVocali.length === 1) {
+            return stringaConsonanti[0] + stringaVocali[0] + 'x';
+          }
+          return stringaConsonanti[0] + stringaVocali[0] + stringaVocali[1];
+        } else if (differenza === 1) {
+          if ( stringaVocali.length === 0 ) {
+            return stringaConsonanti[0] + stringaConsonanti[1] + 'x';
+          }
+          return stringaConsonanti[0] + stringaConsonanti[1] + stringaVocali[0];
+        }
       } else {
-        stringaVocali += stringaCognome[i];
+        return stringaConsonanti[0] + stringaConsonanti[1] + stringaConsonanti[2];
       }
-    }
-    if (stringaConsonanti.length < 3) {
-      differenza = 3 - stringaConsonanti.length;
-      if (differenza === 3) {
-        if (stringaVocali.length === 2) {
-          return stringaVocali + 'x';
-        } else {
-        return stringaVocali[0] + stringaVocali[1] + stringaVocali[2];
-        }
-      } else if (differenza === 2) {
-        if (stringaVocali.length === 1) {
-          return stringaConsonanti[0] + stringaVocali[0] + 'x';
-        }
-        return stringaConsonanti[0] + stringaVocali[0] + stringaVocali[1];
-      } else if (differenza === 1) {
-        if ( stringaVocali.length === 0 ) {
-          return stringaConsonanti[0] + stringaConsonanti[1] + 'x';
-        }
-        return stringaConsonanti[0] + stringaConsonanti[1] + stringaVocali[0];
-      }
-    } else {
-      return stringaConsonanti[0] + stringaConsonanti[1] + stringaConsonanti[2];
-    }
+    
   }
 
   cotrolloFiscaleData() {
@@ -210,9 +209,9 @@ export class ControlloLetteraComponent implements OnInit {
       && stringaCf[10] === data[9] ) {
         console.log(new String( parseInt(data[8], 10) + 4));
         console.log(stringaCf[9]);
-        if ( this.profileForm.get('genderm').value === 'f' && stringaCf[9] === new String( parseInt(data[8], 10) + 4))  {
+        if ( this.profileForm.get('genderm').value === 'F' && stringaCf[9] === new String( parseInt(data[8], 10) + 4))  {
           return true;
-        } else if (this.profileForm.get('genderm').value === 'm' && stringaCf[9] === data[8]) {
+        } else if (this.profileForm.get('genderm').value === 'M' && stringaCf[9] === data[8]) {
         return true;
         } else {
           return false;
@@ -221,7 +220,6 @@ export class ControlloLetteraComponent implements OnInit {
         return false;
     }
   }
-
 
  // get month
   data(): boolean {
@@ -290,6 +288,10 @@ export class ControlloLetteraComponent implements OnInit {
     var arrGiorno = Math.floor(giorno); 
 
     return arrnAnno;
- }
 
+  }
+
+  msgNome='';
+
+  onSubmit() { }
 }

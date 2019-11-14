@@ -1,102 +1,192 @@
+
+<div class="spazio">
+  <div class="bianco">
+    <div class="sopra">
+      registati
+    </div>
+
+    <div class="contenitore">
+      <form id="pf" class="form" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Nome</mat-label>
+            <input class="MM" matInput formControlName="firstName" required>
+            <mat-hint>Hint</mat-hint>
+          </mat-form-field>
+          {{controlloFiscaleNome()}}
+        </div>
+
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Cognome</mat-label>
+            <input class="MM" matInput formControlName="lastName" required>
+            <mat-hint>Hint</mat-hint>
+          </mat-form-field>
+          {{controlloFiscaleCognome()}}
+        </div>
+
+        <div class="sesso">
+          <label class="labelSesso">Sesso*: </label>
+          <mat-radio-group class="example-container" formControlName="genderm">
+            <mat-radio-button value="F">Femmina</mat-radio-button>
+            <mat-radio-button value="M">Maschio</mat-radio-button>
+          </mat-radio-group>
+        </div>
+          
+        <div>
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="birthday" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          {{profileForm.get('birthday').value}}
+          L'utente ha {{ anni() }} anni
+          {{cotrolloFiscaleData()}}
+        </div>
+          
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Codce Fiscale</mat-label>
+            <input class ="codfis" matInput formControlName="cf" requiredrequired>
+            <mat-icon matSuffix matTooltip="Esempio: STFMTL12S34L567I" matTooltipPosition="right">help_outline</mat-icon>
+            <mat-hint>Hint</mat-hint>
+          </mat-form-field>
+          {{ "è valido:" + controlloCodice() }}
+        </div>
+
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Carta d'Identità</mat-label>
+            <input class ="cart" matInput formControlName="ciNumber" required>
+            <mat-icon matSuffix matTooltip="Esempio: CV1234567" matTooltipPosition="right">help_outline</mat-icon>
+            <mat-hint>Hint</mat-hint>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker2" placeholder="Data di Rilascio" formControlName="ciEmission" required>
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker3" placeholder="Data di Scadenza" formControlName="ciEspire" required>
+            <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+            <mat-datepicker #picker3></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!--
 <form id="pf" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-  
-    <label>
+    
+      <label>
         Nome*:
         <input type="text" formControlName="firstName" required> 
         <a id="MM" *ngIf="profileForm.get('firstName').valid"> {{ controlloFiscaleNome() }} </a>
-        <!-- formControlName serve nel ts per i validatori, le istanze e per sapere a quale si sta facendo riferimento -->
+          formControlName serve nel ts per i validatori, le istanze e per sapere a quale si sta facendo riferimento
         <div id="V" *ngIf="profileForm.get('firstName').invalid && profileForm.get('firstName').touched">campo invalido</div>
-        <!-- se al click il campo è sbagliato compare un div, altrimenti non succede nulla -->
+          se al click il campo è sbagliato compare un div, altrimenti non succede nulla
         <div>{{msgNome}}</div>
-    </label>
-    <br>
-    <label>
-        Cognome*:
-        <input type="text" formControlName="lastName" required> 
-        <a id="MM" *ngIf="profileForm.get('lastName').valid"> {{ controlloFiscaleCognome() }} </a>
-        <div id="V" *ngIf="profileForm.get('lastName').invalid  && profileForm.get('lastName').touched">campo invalido</div>
-    </label>
-    <br>
+      </label>
+
+      <label>
+          Cognome*:
+          <input type="text" formControlName="lastName" required> 
+          <a id="MM" *ngIf="profileForm.get('lastName').valid"> {{ controlloFiscaleCognome() }} </a>
+          <div id="V" *ngIf="profileForm.get('lastName').invalid  && profileForm.get('lastName').touched">campo invalido</div>
+      </label>
+
       <label>
         Sesso*:
         f:<input type="radio"  value="f" formControlName="genderm" >
         m:<input type="radio"  value="m" formControlName="genderm" >
         <div id="V" *ngIf="profileForm.get('genderm').invalid && profileForm.get('genderm').touched">campo invalido</div>
-
-        <!-- il form deve essere lo stesso, non ci vanno le quadre attorno a value perche la considera una direttiva, cosi rimane un semplice tag html-->
-        <!-- prende il valore di quella checkata -->
+        il form deve essere lo stesso, non ci vanno le quadre attorno a value perche la considera una direttiva,
+          cosi rimane un semplice tag html
+        prende il valore di quella checkata
       </label>
-      <br>
+
       <label>
         Data di nascita*:
         <input type="date" formControlName="birthday" required> 
         <a id="MM" *ngIf="profileForm.get('birthday').valid"> L'utente ha {{ anni() }} anni </a>
         <div id="V" *ngIf="profileForm.get('birthday').invalid && profileForm.get('birthday').touched">campo invalido</div>
-
       </label>
-      <br>
+
       <label>
         Codice fiscale*:
         <input class ="codfis" type="text" formControlName="cf" required> {{ "è valido:" + controlloCodice() }}
         <div id="V" *ngIf="profileForm.get('cf').invalid && profileForm.get('cf').touched">campo invalido</div>
         {{cotrolloFiscaleData()}}
-      </label>   
-      <br>
+      </label>
+
       <label>
         Carta d'identita*:
         <input class ="cart" type="text" formControlName="ciNumber" required>
         <div id="V" *ngIf="profileForm.get('ciNumber').invalid && profileForm.get('ciNumber').touched">campo invalido</div>
       </label>
-      <br>
+
       <label>
         Data di rilascio*:
         <input type="date" formControlName="ciEmission" required>
         <div id="V" *ngIf="profileForm.get('ciEmission').invalid && profileForm.get('ciEmission').touched">campo invalido</div>
       </label>
-      <br>
+
       <label>
         Data di scadenza*:
         <input type="date" formControlName="ciEspire" required> {{ dataMinoreMaggiore() }}
         <div id="V" *ngIf="profileForm.get('ciEspire').invalid && profileForm.get('ciEspire').touched">campo invalido</div>
       </label>
-      <br>
+
       <label>
         Email:
         <input type="text" formControlName="email">
         <div id="V" *ngIf="profileForm.get('email').invalid && profileForm.get('email').touched">campo invalido</div>
       </label>
-      <br>
+
       <label>
         Via/Corso:
         <input type="text" formControlName="route">
         <div id="V" *ngIf="profileForm.get('route').invalid && profileForm.get('route').touched">campo invalido</div>
       </label>
-      <br>
+
       <label>
         Numero civico:
         <input type="text" formControlName="civicNumber">
         <div id="V" *ngIf="profileForm.get('civicNumber').invalid && profileForm.get('civicNumber').touched">campo invalido</div>
       </label>
-      <br>
+
       <label>
         Citta:
         <input type="text" formControlName="cityResidence">
         <div id="V" *ngIf="profileForm.get('cityResidence').invalid && profileForm.get('cityResidence').touched">campo invalido</div>
       </label>
-      <br>
+
       <label>
         Cap:
         <input type="text" formControlName="cap">
         <div id="V" *ngIf="profileForm.get('cap').invalid && profileForm.get('cap')">campo invalido</div>
       </label>
-      <br>
+
       <button type="submit" [disabled]="profileForm.invalid || !controlloCodice() || !dataMinoreMaggiore() || !cotrolloFiscaleData()">Submit</button>
+      
       <div *ngFor="let post of posts | async">
         {{post | json}}
       </div>
+
       <p>
         Compila il form finche è valido, stato: {{ profileForm.status }}
       </p>
-      <!-- <div *ngIf="profileForm.get('firstName').invalid ">campo invalido</div> -->
-  </form>
+      <div *ngIf="profileForm.get('firstName').invalid ">campo invalido</div>
+</form> -->
 <!-- sesso, nome, cognome, data di nascita, codice fiscale, email, carta d'identita. emessa il, scade il, residenza -->
